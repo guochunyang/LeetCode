@@ -5,7 +5,7 @@
 using namespace std;
 
 
-class Solution {
+class Solution1 {
 public:
 
     int lengthOfLongestSubstring(string s) {
@@ -49,6 +49,47 @@ public:
 
 };
 
+
+
+// 一次循环完成计算
+class Solution {
+public:
+
+    int lengthOfLongestSubstring(string s) {
+        int hash[256];
+        memset(hash, -1, sizeof(hash));
+
+        int size = static_cast<int>(s.size());
+        int max_len = 0;
+
+        int len = 0;
+        for (int i = 0; i < size; ++i)
+        {
+            if (hash[s[i]] == -1) // 未出现过
+            {
+                len ++;
+                hash[s[i]] = i;  // 记录出现的位置
+            }
+            else
+            {
+                int lasted_index = hash[s[i]];
+                if (i - len <= lasted_index)
+                    len = i - lasted_index;  // 重新计算len
+                else
+                    len += 1;
+                hash[s[i]] = i; // 
+            }
+
+            max_len = max_len > len ? max_len : len;
+
+        }
+
+        return max_len;
+    }
+
+};
+
+
 int main()
 {
     string s = "abcabcbb";
@@ -59,4 +100,5 @@ int main()
     cout << solution.lengthOfLongestSubstring("au") << endl;
     cout << solution.lengthOfLongestSubstring("a") << endl;
     cout << solution.lengthOfLongestSubstring("abcb") << endl;
+    cout << solution.lengthOfLongestSubstring("aa") << endl;
 }
