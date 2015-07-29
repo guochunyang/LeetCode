@@ -1,6 +1,7 @@
 #include <vector>
 #include <unordered_map>
 #include <map>
+#include <algorithm>
 using namespace std;
 
 /*
@@ -172,6 +173,55 @@ public:
         return ret;
     }
 };
+
+
+class Solution5 {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+
+        vector<pair<int, size_t>> vec(nums.size());
+
+        int size = static_cast<int>(nums.size());
+        for (int i=0; i < size; ++i)
+        {
+            vec[i] = make_pair(nums[i], static_cast<size_t>(i));
+        }
+
+        auto f = [](pair<int, size_t> a, pair<int, size_t> b)
+        {
+            return a.first < b.first;
+        };
+
+        sort(vec.begin(), vec.end(), f);
+
+        vector<int> ret(2);
+        int begin = 0;
+        int end = size-1;
+
+        while (begin < end)
+        {
+            int tmp = vec[begin].first + vec[end].first;
+            if (tmp > target)
+                end --;
+            else if(tmp < target)
+                begin ++;
+            else
+            {
+                ret[0] = vec[begin].second + 1;
+                ret[1] = vec[end].second + 1;
+                if (ret[0] > ret[1])
+                {
+                    int temp = ret[0];
+                    ret[0] = ret[1];
+                    ret[1] = temp;
+                }
+                return ret;
+            }
+        }
+        return ret;
+    }
+};
+
 
 
 int main()
