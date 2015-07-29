@@ -12,7 +12,6 @@ class Solution1 {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
 
-
         map<int, vector<int> > m;
         size_t size = nums.size();
         for(int ix =0 ; ix < size; ++ix)
@@ -70,7 +69,6 @@ public:
         int size = static_cast<int>(nums.size()); // nums.size();
         for(int ix =0 ; ix < size; ++ix)
         {
-            // cout << "ix: " << ix << " nums: " << nums[ix] << endl;
             m[nums[ix]] = ix;
         }
 
@@ -101,7 +99,6 @@ public:
 };
 
 
-
 class Solution3 {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
@@ -122,7 +119,6 @@ public:
             int t1 = nums[ix];
             int t2 = target - t1;
 
-
             int t2_index = m[t2+50000];
             if (t2_index == -1)
                 continue; // 找不到t2
@@ -133,11 +129,9 @@ public:
             ret[0] = ix+1;
             ret[1] = t2_index+1;
             return ret;
-
         }
 
         return ret;
-
     }
 };
 
@@ -145,7 +139,6 @@ public:
 class Solution4 {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-
 
         // map<int, int> m;
         unordered_map<int, int> m;
@@ -175,11 +168,8 @@ public:
             ret[0] = ix+1;
             ret[1] = t2_index+1;
             return ret;
-
         }
-
         return ret;
-
     }
 };
 
